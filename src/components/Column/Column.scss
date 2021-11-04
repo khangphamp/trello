@@ -2,7 +2,7 @@
 $column-header-height: 36px;
 $column-footer-height: 36px;
 $column-border-radius: 8px;
-$card-border-radius: 5px;
+
 $list-bg-color: #ebecf0;
 
 .column {
@@ -38,7 +38,7 @@ $list-bg-color: #ebecf0;
         border-bottom-right-radius: $column-border-radius;
     }
 
-    ul.task-list {
+    ul.card-list {
         list-style-type: none;
         margin: 0;
         max-height: calc(100% - #{$column-header-height} - #{$column-footer-height});
@@ -56,6 +56,5 @@ $list-bg-color: #ebecf0;
             background-color: darken($list-bg-color, 15);
             border-right: 5px solid $list-bg-color;
         }
-
     }
 }
