@@ -1,4 +1,4 @@
-import React,{} from 'react';
+import React, {} from 'react';
 import './App.scss';
 import AppBar from 'components/AppBar/AppBar';
 import BoardBar from 'components/BoardBar/BoardBar';

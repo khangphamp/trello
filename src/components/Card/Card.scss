@@ -1,14 +1,13 @@
 @import '_setting.scss';
 $card-border-radius: 5px;
-li.card-item {
+.card-item {
     background-color: white;
     padding: $gap;
     border-radius: $card-border-radius;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    cursor: pointer;
+    margin-bottom: 10px;
 
-    &:not(:last-child) {
-        margin-bottom: 10px;
-    }
 
     > img {
         display: block;
