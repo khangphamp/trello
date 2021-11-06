@@ -10,6 +10,11 @@ body {
   height: 100vh;
   overflow: hidden;
   background-color: $board-bg-color ;
+
+  .icon {
+    font-size: 16px;
+    margin-right: 6px;
+  }
 }
 
 
