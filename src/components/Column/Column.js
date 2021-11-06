@@ -3,12 +3,9 @@ import { Container, Draggable } from 'react-smooth-dnd';
 
 import React from 'react';
 import './Column.scss';
-function Column({ column }) {
+function Column({ column, onCardDrop }) {
   const cards = column.cards;
 
-  const onCardDrop = (dropResult) => {
-    console.log(dropResult);
-  };
   return (
     <div className="column">
       <header className="column-drag-handle">{column.title}</header>
@@ -16,7 +13,7 @@ function Column({ column }) {
         <Container
           {...column.props}
           groupName="col-trello"
-          onDrop={onCardDrop}
+          onDrop={dropResult => onCardDrop(column.id, dropResult)}
           getChildPayload={index => cards[index]}
           dragClass="card-ghost"
           dropClass="card-ghost-drop"
@@ -35,7 +32,10 @@ function Column({ column }) {
           )}
         </Container>
       </div>
-      <footer>Add another card</footer>
+      <footer className="footer-actions">
+        <i className="fa fa-plus icon"></i>
+        Add another card
+      </footer>
     </div>
   );
 }

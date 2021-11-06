@@ -24,4 +24,19 @@ $list-bg-color: #ebecf0;
       border: 1px dashed #abc;
       margin: 5px;
     }
+    .add-new-column {
+      width: 250px;
+      height: 32px;
+      line-height: 32px;
+      padding: 4px 0 4px 15px;
+      cursor: pointer;
+      color: white;
+      margin-left: $gap;
+      font-size: 15px;
+      background-color: hsl(0, 0%, 100%,.24);
+      border-radius: 5px;
+      &:hover {
+        background-color: hsl(0, 0%, 100%,.34);
+      }
+    }
   }
