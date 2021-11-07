@@ -1,8 +1,9 @@
 import Card from 'components/Card/Card';
 import { Container, Draggable } from 'react-smooth-dnd';
-import { Dropdown, Form } from 'react-bootstrap';
+import { Dropdown, Form, Button } from 'react-bootstrap';
 
 import React, { useState, useEffect } from 'react';
+import { cloneDeep } from 'lodash';
 import ConfirmModal from 'components/Common/ConfirmModal';
 import { MODAL_ACTION_CONFIRM } from 'utilities/constants';
 
@@ -11,7 +12,33 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
   const cards = column.cards;
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [columnTitle, setColumnTitle] = useState('');
-  const HandleEditTitle = (e) => {
+  const [OpenNewCardForm, setOpenNewCardForm] = useState(false);
+  const [newCardContent, setNewCardContent] = useState('');
+  const FocusInput = React.useRef(null);
+  useEffect(() => {
+    if (FocusInput && FocusInput.current) {
+      FocusInput.current.focus();
+    }
+  });
+  const addNewCard = () => {
+    if (!newCardContent) {
+      FocusInput.current.focus();
+      return;
+    }
+    const newCardToAdd = {
+      id: Math.random().toString(36).substr(2, 5),
+      boardId: column.boardId,
+      columnId: column.id,
+      title: newCardContent.trim(),
+      cover: null
+    };
+    const newColumn = cloneDeep(column);
+    newColumn.cards.push(newCardToAdd);
+    newColumn.cardOrder.push(newCardToAdd.id);
+    onUpdateColumn(newColumn);
+    setOpenNewCardForm(false);
+  };
+  const HandleEditTitle = () => {
     const newColumn = {
       ...column,
       title:columnTitle
@@ -89,11 +116,32 @@ function Column({ column, onCardDrop, onUpdateColumn }) {
           )
           )}
         </Container>
+        { OpenNewCardForm &&
+        <div className="card-new-card-area">
+          <Form.Control
+            size="sm"
+            as="textarea"
+            rows="3"
+            placeholder="Enter column title ..."
+            className="input-enter-new-column"
+            ref={FocusInput}
+            value={newCardContent}
+            onChange={(e) => setNewCardContent(e.target.value)}
+            onKeyDown={e => (e.key === 'Enter') && addNewCard()}
+          />
+          <Button onClick={addNewCard} variant="success" size="sm">Add card</Button>
+          <span onClick={() => setOpenNewCardForm(false)} className="cancel-new-column">
+            <i className="fa fa-trash icon"></i>
+          </span>
+        </div>
+        }
       </div>
-      <footer className="footer-actions">
+      {!OpenNewCardForm &&
+      <footer onClick={() => setOpenNewCardForm(true)} className="footer-actions">
         <i className="fa fa-plus icon"></i>
         Add another card
       </footer>
+      }
       <ConfirmModal
         show={showConfirmModal}
         onAction={onConfirmModalAction}

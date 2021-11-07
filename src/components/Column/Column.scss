@@ -107,5 +107,12 @@ $list-bg-color: #ebecf0;
             border: 1px dashed #abc;
             margin: 5px;
         }
+        .card-new-card-area {
+            textarea {
+                min-height: 54px;
+                max-height: 162px;
+                margin-bottom: 10px;
+            }
+        }
     }
 }
