@@ -29,6 +29,33 @@ $list-bg-color: #ebecf0;
         border-top-left-radius: $column-border-radius;
         border-top-right-radius: $column-border-radius;
         cursor: pointer;
+        display: flex;
+        .column-title {
+            flex: 90%;
+        }
+        .column-dropdown-actions {
+            float: 10%;
+            .dropdown-btn {
+                padding: 0 10px;
+                font-size: 20px;
+                font-weight: bold;
+                letter-spacing: 1px;
+                background-color: $list-bg-color;
+                border: none;
+                color: #000;
+                &:focus {
+                    box-shadow: none;
+                }
+                &:after {
+                    content: '...';
+                    border: none;
+                }
+                &:hover {
+                    background-color: darken($list-bg-color, 10);
+                    border-color: darken($list-bg-color, 10);
+                }
+            }
+        }
     }
 
     footer {
