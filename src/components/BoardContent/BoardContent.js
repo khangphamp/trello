@@ -88,12 +88,12 @@ function BoardContent() {
     const columnIdToUpdate = newColumnToUpdate.id;
 
     let newColumns = [...columns];
-    const columnIndexToUpdate = newColumns.find(column => column.id === columnIdToUpdate);
-    if (newColumnToUpdate.title) {
-      columnIndexToUpdate.title = newColumnToUpdate.title;
-    }
+    const columnIndexToUpdate = newColumns.findIndex(column => column.id === columnIdToUpdate);
     if (newColumnToUpdate._destroy) {
-      newColumns = newColumns.filter(column => column.id !== columnIdToUpdate);
+      newColumns.splice(columnIndexToUpdate, 1);
+    }
+    else {
+      newColumns.splice(columnIndexToUpdate, 1, newColumnToUpdate);
     }
     let newBoard = { ...board };
     newBoard.columnOrder = newColumns.map(c => c.id);
@@ -102,6 +102,7 @@ function BoardContent() {
     setBoard(newBoard);
 
   };
+
   return (
     <div className="board-columns">
       <Container
